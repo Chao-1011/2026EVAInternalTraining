@@ -1,11 +1,11 @@
 [project]
-# site_url = "https://你的实际站点地址/"
+site_url = "https://chao-1011.github.io/2026EVAInternalTraining/"
 site_name = "EVA 人资部"
 site_description = "EVA 人资部内训资料与电脑维修指南"
 # site_description = "Your project description"
 # site_author = "Your name"
 
-# copyright = "Copyright &copy; 2026 EVA 人资部"
+copyright = "Copyright &copy; 2026 EVA 人资部"
 
 # repo_url = "https://github.com/user/repo"
 # repo_name = "user/repo"

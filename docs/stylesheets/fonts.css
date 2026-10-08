@@ -1,0 +1,43 @@
+/* Font settings only. Keep the native Zensical layout and colors. */
+@font-face {
+  font-family: "LXGW WenKai Screen";
+  src: url("../assets/fonts/LXGWWenKaiScreen.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../assets/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --md-text-font: "LXGW WenKai Screen", "Microsoft YaHei", sans-serif;
+  --md-code-font: "JetBrains Mono", "Sarasa Mono SC", Consolas, monospace;
+}
+
+/* 正文 */
+.md-typeset {
+  font-size: 0.8rem;
+}
+
+/* Callout 正文，包含可折叠提示块 */
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 0.7rem;
+}
+
+/* Callout 标题 */
+.md-typeset .admonition-title,
+.md-typeset details > summary {
+  font-size: 0.75rem;
+}
+
+/* 表格，包含表头与单元格 */
+.md-typeset table:not([class]) {
+  font-size: 0.7rem;
+}

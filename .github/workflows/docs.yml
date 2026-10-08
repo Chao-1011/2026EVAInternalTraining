@@ -1,0 +1,62 @@
+name: Documentation
+
+# 推送后自动发布，也可在 Actions 页面点击 Run workflow 手动发布。
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# 避免多个部署同时更新站点，正在运行的部署会先完成。
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build website
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install Zensical
+        run: python -m pip install "zensical==0.0.68"
+
+      # 请先在 Settings → Pages 将 Source 设置为 GitHub Actions。
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build website
+        run: zensical build --clean
+
+      - name: Upload website artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
